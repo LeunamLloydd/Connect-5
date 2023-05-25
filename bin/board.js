@@ -63,59 +63,75 @@ define(["require", "exports"], function (require, exports) {
             }
         };
         Board.prototype.status = function () {
-            function checkLine(a, b, c, d) {
-                for (var _i = 0, _a = [a, b, c, d]; _i < _a.length; _i++) {
+            function checkLine(a, b, c, d, e) {
+                for (var _i = 0, _a = [a, b, c, d, e]; _i < _a.length; _i++) {
                     var para = _a[_i];
                     if (para === undefined)
                         throw new Error('Parameter is undefined');
                 }
-                return ((a != 0) && (a == b) && (a == c) && (a == d));
+                return (a !== 0 && a === b && a === c && a === d && a === e);
             }
-            for (var x = 0; x < exports.WIDTH; x++) {
-                var prev = this.columns[x][0];
-                var count = 0;
+            
+            // Check horizontal lines
+            for (var x = 0; x < exports.WIDTH - 4; x++) {
                 for (var y = 0; y < exports.HEIGHT; y++) {
-                    if (prev === this.columns[x][y]) {
-                        count++;
-                    }
-                    else {
-                        count = 1;
-                    }
-                    prev = this.columns[x][y];
-                    if (count === 5 && (prev === 1 || prev === 2)) {
-                        return prev;
-                    }
-                    
-                }
-            }
-            for (var y = 0; y < exports.HEIGHT; y++) {
-                var prev = this.columns[0][y];
-                var count = 0;
-                for (var x = 0; x < exports.WIDTH; x++) {
-                    if (prev === this.columns[x][y]) {
-                        count++;
-                    }
-                    else {
-                        count = 1;
-                    }
-                    prev = this.columns[x][y];
-                    if (count === 5 && (prev === 1 || prev === 2)) {
-                        return prev;
-                    }
-                }
-            }
-            for (var x = 0; x < 5; x++) {
-                for (var y = 0; y < 5; y++) {
-                    if (checkLine(this.columns[x][y], this.columns[x + 1][y + 1], this.columns[x + 2][y + 2], this.columns[x + 3][y + 3], this.columns[x + 4][y + 4]))
+                    if (checkLine(
+                        this.columns[x][y],
+                        this.columns[x + 1][y],
+                        this.columns[x + 2][y],
+                        this.columns[x + 3][y],
+                        this.columns[x + 4][y]
+                    )) {
                         return this.columns[x][y];
+                    }
                 }
             }
-            for (var x = 0; x < 5; x++) {
-                for (var y = 8; y > 3; y--) {
-                    if (checkLine(this.columns[x][y], this.columns[x + 1][y - 1], this.columns[x + 2][y - 2], this.columns[x + 3][y - 3], this.columns[x + 4][y - 4]))
+            
+            // Check vertical lines
+            for (var x = 0; x < exports.WIDTH; x++) {
+                for (var y = 0; y < exports.HEIGHT - 4; y++) {
+                    if (checkLine(
+                        this.columns[x][y],
+                        this.columns[x][y + 1],
+                        this.columns[x][y + 2],
+                        this.columns[x][y + 3],
+                        this.columns[x][y + 4]
+                    )) {
                         return this.columns[x][y];
+                    }
                 }
             }
+            
+            // Check top left to bottom right diagonals
+            for (var x = 0; x < exports.WIDTH - 4; x++) {
+                for (var y = 0; y < exports.HEIGHT - 4; y++) {
+                    if (checkLine(
+                        this.columns[x][y],
+                        this.columns[x + 1][y + 1],
+                        this.columns[x + 2][y + 2],
+                        this.columns[x + 3][y + 3],
+                        this.columns[x + 4][y + 4]
+                    )) {
+                        return this.columns[x][y];
+                    }
+                }
+            }
+            
+            // Check bottom left to top right diagonals
+            for (var x = 0; x < exports.WIDTH - 4; x++) {
+                for (var y = 4; y < exports.HEIGHT; y++) {
+                    if (checkLine(
+                        this.columns[x][y],
+                        this.columns[x + 1][y - 1],
+                        this.columns[x + 2][y - 2],
+                        this.columns[x + 3][y - 3],
+                        this.columns[x + 4][y - 4]
+                    )) {
+                        return this.columns[x][y];
+                    }
+                }
+            }
+            
             // // Check down-right
             // for (let y = 0; y < WIDTH - 3; y++)
             //   for (let x = 0; x < HEIGHT - 3; x++)
