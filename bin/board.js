@@ -105,13 +105,13 @@ define(["require", "exports"], function (require, exports) {
                 }
             }
             for (var x = 0; x < 5; x++) {
-                for (var y = 5; y < 4; y++) {
+                for (var y = 5; y < 3; y++) {
                     if (checkLine(this.columns[x][y], this.columns[x + 1][y + 1], this.columns[x + 2][y + 2], this.columns[x + 3][y + 3]))
                         return this.columns[x][y];
                 }
             }
             for (var x = 0; x < 5; x++) {
-                for (var y = 0; y > 3; y--) {
+                for (var y = 0; y > 2; y--) {
                     if (checkLine(this.columns[x][y], this.columns[x + 1][y - 1], this.columns[x + 2][y - 2], this.columns[x + 3][y - 3]))
                         return this.columns[x][y];
                 }
