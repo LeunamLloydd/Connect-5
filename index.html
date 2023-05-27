@@ -52,13 +52,13 @@
     .col2{
       display: flex;
       flex-direction: row;
-      padding-top: 5% ;
-      padding-left: 30%;
+      padding-top: 20px;
+      padding-left: 31%;
     }
     
     header {
   background-color: darkblue;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
 }
 
@@ -90,6 +90,15 @@ form#level label {
   color: darkblue;
 }
 
+.message {
+  padding-top: 5px;
+  font-weight: bold;
+  font-size: 30px;
+  color: red;
+  text-align: center;
+}
+
+
 
 
 
@@ -99,10 +108,13 @@ form#level label {
   <h1>5-in-a-Row Game</h1>
 </header>
 
+<body>
+
+  <div id="message" class="message"></div>
 
 
-
-  <div class="col2">
+  <div class="col2" id="board">
+ 
   <div class="col">
     <div class="row"></div>
     <div class="row"></div>
@@ -202,7 +214,7 @@ form#level label {
     <div class="row"></div>
     <div class="row"></div>
   </div>
-
+  
   <div class="side">
     <form id="level">
       <fieldset>
@@ -249,9 +261,11 @@ form#level label {
         </div>
       </fieldset>
     </form>
+    
     </div>
   </div>
   </div>
+  
   <script>
     requirejs(["bin/game"], function (game) {
       const newGame = new game.Game();
