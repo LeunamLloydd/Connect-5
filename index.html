@@ -86,9 +86,7 @@ form#level legend {
   
 }
 
-form#level label {
-  color: darkblue;
-}
+
 
 .message {
   padding-top: 5px;
@@ -97,13 +95,38 @@ form#level label {
   color: red;
   text-align: center;
 }
+.restart-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
 
+    .restart-button button {
+      background-color: blue;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      transition-duration: 0.3s;
+    }
 
-
-
-
-    
+    .restart-button button:hover {
+      background-color: darkblue;
+    }
+    .side form fieldset input[type="radio"]:checked+label {
+      font-weight: bold;
+      color: red;
+    }
   </style>
+    <script>
+      function restartGame() {
+        window.location.reload();
+      }
+    </script>
 <header>
   <h1>5-in-a-Row Game</h1>
 </header>
@@ -261,7 +284,9 @@ form#level label {
         </div>
       </fieldset>
     </form>
-    
+    <div class="restart-button">
+      <button onclick="restartGame()">Restart Game</button>
+    </div>
     </div>
   </div>
   </div>
